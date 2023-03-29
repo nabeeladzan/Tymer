@@ -9,4 +9,6 @@
     <color name="white">#FFFFFFFF</color>
     <color name="whitesmoke">#FFF5F5F5</color>
     <color name="slategray">#FF708090</color>
+    <color name="red">#DF3F48</color>
+    <color name="darkgray">#2B3136</color>
 </resources>
