@@ -1,6 +1,7 @@
 package org.finalware.tymer
 
 import android.graphics.Color
+import android.media.MediaPlayer
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.CountDownTimer
@@ -146,6 +147,9 @@ class MainActivity : AppCompatActivity() {
         binding.buttonReset.text = getString(R.string.pause)
         binding.buttonReset.setOnClickListener { pauseTimer() }
 
+        //hide theme button
+        binding.buttonTheme.visibility = android.view.View.INVISIBLE
+
 
         // set timer
         timer = object : CountDownTimer(
@@ -196,11 +200,18 @@ class MainActivity : AppCompatActivity() {
         binding.buttonReset.text = getString(R.string.reset)
         binding.buttonReset.setOnClickListener { resetTimer() }
 
+        // play beep sound
+        val mediaPlayer = MediaPlayer.create(this, R.raw.beep)
+        mediaPlayer.start()
+
         // animate fade out of textViewCount
         binding.textViewCount.animate().alpha(0f).duration = 150
         binding.textViewCount.postDelayed({
             binding.textViewCount.visibility = android.view.View.INVISIBLE
         }, 150)
+
+        //show theme button
+        binding.buttonTheme.visibility = android.view.View.VISIBLE
 
         // stop timer
         isCounting = false
