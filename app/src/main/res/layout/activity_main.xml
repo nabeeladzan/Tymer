@@ -32,7 +32,8 @@
         android:textSize="48sp"
         android:textStyle="bold|italic"
         app:layout_constraintBottom_toTopOf="@+id/buttonReset"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:ignore="TextSizeCheck,TextContrastCheck" />
 
     <TextView
         android:id="@+id/textViewTitle"
@@ -46,7 +47,8 @@
         android:textSize="48sp"
         android:textStyle="bold|italic"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="TextSizeCheck,TextContrastCheck" />
 
 
     <TextView
@@ -59,7 +61,8 @@
         android:textSize="34sp"
         app:layout_constraintBottom_toBottomOf="@+id/inputSecond"
         app:layout_constraintStart_toEndOf="@+id/inputSecond"
-        app:layout_constraintTop_toTopOf="@+id/inputSecond" />
+        app:layout_constraintTop_toTopOf="@+id/inputSecond"
+        tools:ignore="VisualLintOverlap" />
 
     <TextView
         android:id="@+id/textViewMinutes"
@@ -95,7 +98,8 @@
         android:inputType="number"
         android:textSize="24sp"
         app:layout_constraintStart_toStartOf="@+id/textViewTitle"
-        app:layout_constraintTop_toBottomOf="@+id/textViewTitle" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewTitle"
+        tools:ignore="DuplicateSpeakableTextCheck" />
 
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/inputMinute"
@@ -127,7 +131,6 @@
         android:layout_height="wrap_content"
         android:alpha="0"
         android:fontFamily="@font/roboto"
-        android:text="TextView"
         android:textSize="56sp"
         app:layout_constraintBottom_toTopOf="@+id/buttonMain"
         app:layout_constraintEnd_toEndOf="parent"

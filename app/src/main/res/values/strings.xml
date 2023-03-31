@@ -9,7 +9,7 @@
     <string name="minutes">Minutes</string>
     <string name="seconds">Seconds</string>
     <string name="zero">0</string>
-    <string name="missing_input">Please enter a value for all fields</string>
+    <string name="missing_input">Please enter a value for at least one fields</string>
     <string name="input_negative">Please enter a positive value for all fields</string>
     <string name="seconds_over_60">Please enter a value for seconds less than 60</string>
     <string name="minutes_over_60">Please enter a value for minutes less than 60</string>

@@ -9,7 +9,9 @@ import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatDelegate
 import org.finalware.tymer.databinding.ActivityMainBinding
-import androidx.core.content.ContextCompat;
+import androidx.core.content.ContextCompat
+
+private var lastToastTime: Long = 0
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -58,9 +60,19 @@ class MainActivity : AppCompatActivity() {
         var minutes = binding.inputMinute.text.toString()
         var seconds = binding.inputSecond.text.toString()
 
+        var toastIsShown = false
+
+        val currentTime = System.currentTimeMillis()
+        if (currentTime - lastToastTime < 2000) {
+            toastIsShown = true
+        }
+
         // check inputs if all inputs are empty and send toast
         if (hours.isEmpty() && minutes.isEmpty() && seconds.isEmpty()) {
-            Toast.makeText(this, R.string.missing_input, Toast.LENGTH_LONG).show()
+            if (!toastIsShown) {
+                Toast.makeText(this, R.string.missing_input, Toast.LENGTH_LONG).show()
+                lastToastTime = currentTime
+            }
             duration = notValidDuration
             return
         }
@@ -78,28 +90,40 @@ class MainActivity : AppCompatActivity() {
 
         // check if negative
         if (hours.toInt() < 0 || minutes.toInt() < 0 || seconds.toInt() < 0) {
-            Toast.makeText(this, R.string.input_negative, Toast.LENGTH_LONG).show()
+            if (!toastIsShown) {
+                Toast.makeText(this, R.string.input_negative, Toast.LENGTH_LONG).show()
+                lastToastTime = currentTime
+            }
             duration = notValidDuration
             return
         }
 
         // check if over 60
         if (seconds.toInt() > 60) {
-            Toast.makeText(this, R.string.seconds_over_60, Toast.LENGTH_LONG).show()
+            if (!toastIsShown) {
+                Toast.makeText(this, R.string.seconds_over_60, Toast.LENGTH_LONG).show()
+                lastToastTime = currentTime
+            }
             duration = notValidDuration
             return
         }
 
         // check if over 60
         if (minutes.toInt() > 60) {
-            Toast.makeText(this, R.string.minutes_over_60, Toast.LENGTH_LONG).show()
+            if (!toastIsShown) {
+                Toast.makeText(this, R.string.minutes_over_60, Toast.LENGTH_LONG).show()
+                lastToastTime = currentTime
+            }
             duration = notValidDuration
             return
         }
 
         // check if over 24
         if (hours.toInt() > 24) {
-            Toast.makeText(this, R.string.hours_over_24, Toast.LENGTH_LONG).show()
+            if (!toastIsShown) {
+                Toast.makeText(this, R.string.hours_over_24, Toast.LENGTH_LONG).show()
+                lastToastTime = currentTime
+            }
             duration = notValidDuration
             return
         }
