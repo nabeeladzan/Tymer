@@ -1,4 +1,4 @@
-package org.finalware.tymer
+package org.finalware.tymer.model
 
 data class Duration(
     var hours: Int,
