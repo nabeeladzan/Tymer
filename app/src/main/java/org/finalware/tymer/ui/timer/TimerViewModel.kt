@@ -22,6 +22,12 @@ class TimerViewModel: ViewModel() {
     private val time = MutableLiveData<Time>()
     val beepSoundResId: LiveData<Int> = MutableLiveData()
 
+    var callback: toStop? = null
+
+    fun invokeToStop() {
+        callback?.toStop()
+    }
+
 
     fun getCurrentTime(): MutableLiveData<Time> {
         return time
@@ -32,6 +38,13 @@ class TimerViewModel: ViewModel() {
     }
 
     fun stopTimer() {
+        timer?.cancel()
+        isCounting = false
+
+        invokeToStop()
+    }
+
+    fun pauseTimer() {
         timer?.cancel()
         isCounting = false
     }
@@ -177,4 +190,8 @@ class TimerViewModel: ViewModel() {
             }
         }.start()
     }
+}
+
+interface toStop {
+    fun toStop()
 }

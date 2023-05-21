@@ -11,7 +11,6 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
 
         //full screen activity
         requestWindowFeature(android.view.Window.FEATURE_NO_TITLE)
@@ -20,6 +19,8 @@ class MainActivity : AppCompatActivity() {
             android.view.WindowManager.LayoutParams.FLAG_FULLSCREEN,
             android.view.WindowManager.LayoutParams.FLAG_FULLSCREEN
         )
+
+        setContentView(R.layout.activity_main)
 
         navController = findNavController(R.id.myNavHostFragment)
         NavigationUI.setupActionBarWithNavController(this, navController)

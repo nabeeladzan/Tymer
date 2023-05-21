@@ -7,5 +7,38 @@
     <fragment
         android:id="@+id/fragmentTimer"
         android:name="org.finalware.tymer.ui.timer.FragmentTimer"
-        android:label="FragmentTimer" />
+        android:label="FragmentTimer" >
+        <action
+            android:id="@+id/action_fragmentTimer_to_fragmentPreset"
+            app:destination="@id/fragmentPreset" />
+        <argument
+            android:name="hours"
+            app:argType="integer"
+            />
+        <argument
+            android:name="minutes"
+            app:argType="integer"
+            />
+        <argument
+            android:name="seconds"
+            app:argType="integer"
+            />
+    </fragment>
+
+    <fragment
+        android:id="@+id/fragmentCreate"
+        android:name="org.finalware.tymer.ui.create.FragmentCreate"
+        android:label="FragmentCreate" />
+
+    <fragment
+        android:id="@+id/fragmentPreset"
+        android:name="org.finalware.tymer.ui.preset.FragmentPreset"
+        android:label="FragmentPreset" >
+        <action
+            android:id="@+id/action_fragmentPreset_to_fragmentCreate"
+            app:destination="@id/fragmentCreate" />
+        <action
+            android:id="@+id/action_fragmentPreset_to_fragmentTimer"
+            app:destination="@id/fragmentTimer" />
+    </fragment>
 </navigation>

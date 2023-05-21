@@ -15,4 +15,8 @@
     <string name="minutes_over_60">Please enter a value for minutes less than 60</string>
     <string name="hours_over_24">Please enter a value for hours less than 24</string>
     <string name="modebtn">Dark</string>
+    <string name="create_preset">Create Preset</string>
+    <string name="create">Create</string>
+    <string name="presets">Presets</string>
+    <string name="select">Select</string>
 </resources>
