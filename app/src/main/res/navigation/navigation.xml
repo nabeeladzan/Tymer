@@ -13,16 +13,13 @@
             app:destination="@id/fragmentPreset" />
         <argument
             android:name="hours"
-            app:argType="integer"
-            />
+            app:argType="integer" />
         <argument
             android:name="minutes"
-            app:argType="integer"
-            />
+            app:argType="integer" />
         <argument
             android:name="seconds"
-            app:argType="integer"
-            />
+            app:argType="integer" />
     </fragment>
 
     <fragment

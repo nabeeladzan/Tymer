@@ -52,6 +52,19 @@
         tools:ignore="VisualLintOverlap" />
 
     <TextView
+        android:id="@+id/textViewSeconds2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:fontFamily="@font/roboto"
+        android:text="@string/name"
+        android:textSize="34sp"
+        app:layout_constraintBottom_toBottomOf="@+id/inputName"
+        app:layout_constraintStart_toEndOf="@+id/inputName"
+        app:layout_constraintTop_toTopOf="@+id/inputName"
+        tools:ignore="VisualLintOverlap" />
+
+    <TextView
         android:id="@+id/textViewMinutes"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -111,5 +124,15 @@
         android:textSize="24sp"
         app:layout_constraintStart_toStartOf="@+id/inputMinute"
         app:layout_constraintTop_toBottomOf="@+id/inputMinute" />
+
+    <EditText
+        android:id="@+id/inputName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        app:layout_constraintStart_toStartOf="@+id/inputSecond"
+        app:layout_constraintTop_toBottomOf="@+id/inputSecond" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

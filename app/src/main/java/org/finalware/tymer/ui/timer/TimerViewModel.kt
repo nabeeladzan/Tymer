@@ -11,7 +11,6 @@ import org.finalware.tymer.model.Time
 
 class TimerViewModel: ViewModel() {
     //from v1
-    private var lastToastTime: Long = 0
     private var isCounting = false
     private var duration = Duration(-1, -1, -1)
     private var lastDuration = Duration(-1, -1, -1)
@@ -27,7 +26,6 @@ class TimerViewModel: ViewModel() {
     fun invokeToStop() {
         callback?.toStop()
     }
-
 
     fun getCurrentTime(): MutableLiveData<Time> {
         return time
@@ -87,19 +85,8 @@ class TimerViewModel: ViewModel() {
         var minutes = m
         var seconds = s
 
-        var toastIsShown = false
-
-        val currentTime = System.currentTimeMillis()
-        if (currentTime - lastToastTime > 1000) {
-            toastIsShown = true
-        }
-
         // check inputs if all inputs are empty and send toast
         if (hours.isEmpty() && minutes.isEmpty() && seconds.isEmpty()) {
-            if (!toastIsShown) {
-                //Toast.makeText(this, R.string.missing_input, Toast.LENGTH_LONG).show()
-                lastToastTime = currentTime
-            }
             duration = notValidDuration
             return
         }
@@ -117,40 +104,24 @@ class TimerViewModel: ViewModel() {
 
         // check if negative
         if (hours.toInt() < 0 || minutes.toInt() < 0 || seconds.toInt() < 0) {
-            if (!toastIsShown) {
-                //Toast.makeText(this, R.string.input_negative, Toast.LENGTH_LONG).show()
-                lastToastTime = currentTime
-            }
             duration = notValidDuration
             return
         }
 
         // check if over 60
         if (seconds.toInt() > 60) {
-            if (!toastIsShown) {
-                //Toast.makeText(this, R.string.seconds_over_60, Toast.LENGTH_LONG).show()
-                lastToastTime = currentTime
-            }
             duration = notValidDuration
             return
         }
 
         // check if over 60
         if (minutes.toInt() > 60) {
-            if (!toastIsShown) {
-                //Toast.makeText(this, R.string.minutes_over_60, Toast.LENGTH_LONG).show()
-                lastToastTime = currentTime
-            }
             duration = notValidDuration
             return
         }
 
         // check if over 24
         if (hours.toInt() > 24) {
-            if (!toastIsShown) {
-                //Toast.makeText(this, R.string.hours_over_24, Toast.LENGTH_LONG).show()
-                lastToastTime = currentTime
-            }
             duration = notValidDuration
             return
         }

@@ -8,13 +8,15 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import org.finalware.tymer.R
+import org.finalware.tymer.database.PresetDB
 import org.finalware.tymer.databinding.FragmentPresetBinding
 
 class FragmentPreset: Fragment() {
     private lateinit var binding: FragmentPresetBinding
 
     private val viewModel: PresetViewModel by lazy {
-        PresetViewModel()
+        val db = PresetDB.getDatabase(requireContext())
+        PresetViewModel(db)
     }
 
     override fun onCreateView(

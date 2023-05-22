@@ -1,11 +1,9 @@
 package org.finalware.tymer.ui.preset
 
-import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
-import org.finalware.tymer.R
 import org.finalware.tymer.databinding.PresetItemBinding
 import org.finalware.tymer.model.Duration
 import org.finalware.tymer.model.Preset

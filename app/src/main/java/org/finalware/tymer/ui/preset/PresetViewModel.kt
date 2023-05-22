@@ -1,15 +1,22 @@
 package org.finalware.tymer.ui.preset
 
 import androidx.lifecycle.ViewModel
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import org.finalware.tymer.database.PresetDB
+import org.finalware.tymer.database.PresetEntity
 import org.finalware.tymer.model.Duration
 import org.finalware.tymer.model.Preset
 
-class PresetViewModel: ViewModel() {
+class PresetViewModel(private val db: PresetDB): ViewModel() {
     fun getPresets(): List<Preset> {
-        return listOf(
-            Preset("1 Minute", Duration(0, 1, 0)),
-            Preset("5 Minutes", Duration(0, 5, 0)),
-            Preset("10 Minutes", Duration(0 , 10, 0)),
-        )
+        val presets = mutableListOf<Preset>()
+        GlobalScope.launch {
+            val presetEntities = db.presetDao().getAll()
+            presetEntities.forEach {
+                presets.add(Preset(it.name!!, Duration(it.hours!!, it.minutes!!, it.seconds!!)))
+            }
+        }
+        return presets
     }
 }

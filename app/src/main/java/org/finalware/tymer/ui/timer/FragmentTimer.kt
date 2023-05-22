@@ -7,6 +7,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
@@ -14,6 +15,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import org.finalware.tymer.R
 import org.finalware.tymer.databinding.FragmentTimerBinding
+
 
 class FragmentTimer: Fragment(), toStop {
     private lateinit var binding: FragmentTimerBinding
@@ -38,6 +40,8 @@ class FragmentTimer: Fragment(), toStop {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+
         binding.buttonTheme.setOnClickListener {
             toggleTheme()
         }
@@ -66,13 +70,12 @@ class FragmentTimer: Fragment(), toStop {
             }
         }
 
-
-        try {
-            binding.inputHour.setText(args.hours.toString())
-            binding.inputMinute.setText(args.minutes.toString())
-            binding.inputSecond.setText(args.seconds.toString())
-            startTimer()
-        } catch (e: Exception) {}
+            try {
+                binding.inputHour.setText(args.hours.toString())
+                binding.inputMinute.setText(args.minutes.toString())
+                binding.inputSecond.setText(args.seconds.toString())
+                startTimer()
+            } catch (e: Exception) {}
     }
 
     private fun setTimeText(time: String) {
@@ -120,6 +123,10 @@ class FragmentTimer: Fragment(), toStop {
             return
         }
 
+        if (!validateInput()) {
+            return
+        }
+
         viewModel.startTimer(
             binding.inputHour.text.toString(),
             binding.inputMinute.text.toString(),
@@ -142,6 +149,8 @@ class FragmentTimer: Fragment(), toStop {
     }
 
     fun toStart() {
+
+
         //disable input
         binding.inputHour.isEnabled = false
         binding.inputMinute.isEnabled = false
@@ -172,6 +181,51 @@ class FragmentTimer: Fragment(), toStop {
 
         //hide theme button
         binding.buttonTheme.visibility = android.view.View.INVISIBLE
+    }
+
+    private fun validateInput(): Boolean {
+        //check if input all input fields are empty
+        if (binding.inputHour.text.isNullOrEmpty() &&
+            binding.inputMinute.text.isNullOrEmpty() &&
+            binding.inputSecond.text.isNullOrEmpty()
+        ) {
+            Toast.makeText(requireContext(), "Please enter atleast 1 field", Toast.LENGTH_SHORT).show()
+            return false
+        }
+
+        //check if input is valid
+        if (!binding.inputHour.text.isNullOrEmpty() && binding.inputHour.text.toString().toInt() > 23) {
+            Toast.makeText(requireContext(), "Please enter a valid hour", Toast.LENGTH_SHORT).show()
+            return false
+        }
+
+        if (!binding.inputMinute.text.isNullOrEmpty() && binding.inputMinute.text.toString().toInt() > 59) {
+            Toast.makeText(requireContext(), "Please enter a valid minute", Toast.LENGTH_SHORT).show()
+            return false
+        }
+
+        if (!binding.inputSecond.text.isNullOrEmpty() && binding.inputSecond.text.toString().toInt() > 59) {
+            Toast.makeText(requireContext(), "Please enter a valid second", Toast.LENGTH_SHORT).show()
+            return false
+        }
+
+        //check if negative
+        if (!binding.inputHour.text.isNullOrEmpty() && binding.inputHour.text.toString().toInt() < 0) {
+            Toast.makeText(requireContext(), "Please enter a valid hour", Toast.LENGTH_SHORT).show()
+            return false
+        }
+
+        if (!binding.inputMinute.text.isNullOrEmpty() && binding.inputMinute.text.toString().toInt() < 0) {
+            Toast.makeText(requireContext(), "Please enter a valid minute", Toast.LENGTH_SHORT).show()
+            return false
+        }
+
+        if (!binding.inputSecond.text.isNullOrEmpty() && binding.inputSecond.text.toString().toInt() < 0) {
+            Toast.makeText(requireContext(), "Please enter a valid second", Toast.LENGTH_SHORT).show()
+            return false
+        }
+
+        return true
     }
 
     override fun toStop() {
