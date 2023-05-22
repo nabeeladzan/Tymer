@@ -40,8 +40,4 @@ class PresetAdapter(private val data: List<Preset>): RecyclerView.Adapter<Preset
     override fun getItemCount(): Int {
         return data.size
     }
-
-    fun durationToInt(duration: Duration): Int {
-        return duration.hours * 3600 + duration.minutes * 60 + duration.seconds
-    }
 }

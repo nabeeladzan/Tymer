@@ -12,9 +12,14 @@ import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.asLiveData
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import kotlinx.coroutines.launch
 import org.finalware.tymer.R
 import org.finalware.tymer.databinding.FragmentTimerBinding
+import org.finalware.tymer.datastore.SettingsDataStore
+import org.finalware.tymer.datastore.dataStore
 
 
 class FragmentTimer: Fragment(), toStop {
@@ -28,6 +33,11 @@ class FragmentTimer: Fragment(), toStop {
         FragmentTimerArgs.fromBundle(requireArguments())
     }
 
+    private val themeDataStore: SettingsDataStore by lazy {
+        SettingsDataStore(requireContext().dataStore)
+    }
+
+    private var isDarkMode: Boolean = false
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -76,6 +86,17 @@ class FragmentTimer: Fragment(), toStop {
                 binding.inputSecond.setText(args.seconds.toString())
                 startTimer()
             } catch (e: Exception) {}
+
+        themeDataStore.preferenceFlow.asLiveData().observe(viewLifecycleOwner) {
+            isDarkMode = it
+            if (it) {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+                binding.buttonTheme.setTextColor(Color.WHITE)
+            } else {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+                binding.buttonTheme.setTextColor(Color.BLACK)
+            }
+        }
     }
 
     private fun setTimeText(time: String) {
@@ -83,12 +104,8 @@ class FragmentTimer: Fragment(), toStop {
     }
 
     private fun toggleTheme() {
-        if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES) {
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-            binding.buttonTheme.setTextColor(Color.BLACK)
-        } else {
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-            binding.buttonTheme.setTextColor(Color.WHITE)
+        lifecycleScope.launch {
+            themeDataStore.saveMode(!isDarkMode, requireContext())
         }
     }
 
