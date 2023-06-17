@@ -19,6 +19,8 @@ class FragmentPreset: Fragment() {
         PresetViewModel(db)
     }
 
+    private lateinit var myAdapter: PresetAdapter
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -35,9 +37,17 @@ class FragmentPreset: Fragment() {
             findNavController().navigate(R.id.action_fragmentPreset_to_fragmentCreate)
         }
 
+        viewModel.getPresets()
+
+        viewModel.getData().observe(viewLifecycleOwner) {
+            myAdapter.updateData(it)
+        }
+
+        myAdapter = PresetAdapter()
+
         with(binding.recyclerView) {
             addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
-            adapter = PresetAdapter(viewModel.getPresets())
+            adapter = myAdapter
             setHasFixedSize(true)
         }
     }

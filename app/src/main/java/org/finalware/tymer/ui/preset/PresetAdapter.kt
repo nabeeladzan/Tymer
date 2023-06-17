@@ -8,7 +8,8 @@ import org.finalware.tymer.databinding.PresetItemBinding
 import org.finalware.tymer.model.Duration
 import org.finalware.tymer.model.Preset
 
-class PresetAdapter(private val data: List<Preset>): RecyclerView.Adapter<PresetAdapter.ViewHolder>() {
+class PresetAdapter: RecyclerView.Adapter<PresetAdapter.ViewHolder>() {
+    private val data = mutableListOf<Preset>()
     class ViewHolder(
         private val binding: PresetItemBinding
     ): RecyclerView.ViewHolder(binding.root) {
@@ -39,5 +40,11 @@ class PresetAdapter(private val data: List<Preset>): RecyclerView.Adapter<Preset
 
     override fun getItemCount(): Int {
         return data.size
+    }
+
+    fun updateData(newData: List<Preset>) {
+        data.clear()
+        data.addAll(newData)
+        notifyDataSetChanged()
     }
 }
