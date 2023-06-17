@@ -64,6 +64,10 @@ class FragmentTimer: Fragment(), toStop {
             findNavController().navigate(R.id.action_fragmentTimer_to_fragmentPreset)
         }
 
+        binding.buttonInfo.setOnClickListener {
+            findNavController().navigate(R.id.action_fragmentTimer_to_fragmentCreator)
+        }
+
         // hide textViewCount
         binding.textViewCount.visibility = android.view.View.INVISIBLE
         binding.textViewCount.alpha = 0f

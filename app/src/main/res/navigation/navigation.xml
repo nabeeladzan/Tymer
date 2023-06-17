@@ -20,6 +20,9 @@
         <argument
             android:name="seconds"
             app:argType="integer" />
+        <action
+            android:id="@+id/action_fragmentTimer_to_fragmentCreator"
+            app:destination="@id/fragmentCreator" />
     </fragment>
 
     <fragment
@@ -38,4 +41,8 @@
             android:id="@+id/action_fragmentPreset_to_fragmentTimer"
             app:destination="@id/fragmentTimer" />
     </fragment>
+    <fragment
+        android:id="@+id/fragmentCreator"
+        android:name="org.finalware.tymer.ui.creator.FragmentCreator"
+        android:label="FragmentCreator" />
 </navigation>

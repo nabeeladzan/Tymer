@@ -15,6 +15,7 @@ interface PresetDao {
     @Insert(onConflict = OnConflictStrategy.ABORT)
     fun insert(preset: PresetEntity)
 
-    @Delete
-    fun deletePreset(preset: PresetEntity)
+    // delete with name and duration
+    @Query("DELETE FROM preset_table WHERE name = :name AND hours = :hours AND minutes = :minutes AND seconds = :seconds")
+    fun deletePreset(name: String, hours: Int, minutes: Int, seconds: Int)
 }

@@ -20,4 +20,9 @@
     <string name="presets">Presets</string>
     <string name="select">Select</string>
     <string name="name">Name</string>
+    <string name="delete">Delete</string>
+    <string name="connection_error">Network Error</string>
+    <string name="creator">nabeeladzan</string>
+    <string name="created_by">Created by</string>
+    <string name="description">" I developed the \"Tymer\" timer app for a college assignment. It's a user-friendly timer application that allows users to create and manage timers for different activities. Users can set the duration for each timer and assign names to them. The app helps users stay organized and on track with their tasks."</string>
 </resources>
